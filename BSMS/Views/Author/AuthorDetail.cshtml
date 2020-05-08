@@ -1,0 +1,166 @@
+﻿@model BSMS.bsms.localhost.AUTHOR
+@using BSMS.Session;
+@using BSMS.Models;
+@using System.Web.Script.Serialization;
+
+@{
+    ViewBag.Title = "AuthorDetail";
+    ViewBag.Page = "Author";
+    SessionHandler loginSession = new SessionHandler();
+}
+
+
+<style>
+    .addtionImgDiv {
+        padding: 5px;
+        border-width: 1px;
+        border-color: white;
+    }
+
+        .addtionImgDiv:hover {
+            cursor: pointer;
+        }
+
+    .slidable {
+        transition: all 0.5s ease-in-out;
+    }
+</style>
+
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("index","home")">Home</a></li>
+            <li><a href="@Url.Action("AuthorList","Author")">Authors</a></li>
+            <li class="active">Author Detail</li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        
+        <div class="col-md-4">
+            <img src="@Model.THUMBNAIL_PATH" width="100%" />
+        </div>
+        <div class="col-md-8">
+            <table class="table table-detail">
+                <tr>
+                    <td> Name </td>
+                    <td>  <p> @Model.FIRSTNAME @Model.MIDDLENAME @Model.LASTNAME </p> </td>
+                </tr>
+                <tr>
+                    <td> Alias Name </td>
+                    <td>  <p> @Model.ALIASNAME </p> </td>
+                </tr>
+             
+                <tr>
+                    <td> Biography </td>
+                    <td>  <p> @Model.BIOGRAPHY </p> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <br><div class="title"><span>Books From this author</span></div><br><br>
+        @foreach (var item in AuthorModel.BookByAuthor(Model.AUTHORID))
+        {
+            JavaScriptSerializer json = new JavaScriptSerializer();
+
+            IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookImage = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == item.BOOKID);
+            List<string> imagesPath = new List<string>();
+            foreach (BSMS.bsms.localhost.BOOK_IMAGE image in bookImage)
+            {
+                imagesPath.Add(image.IMAGEPATH);
+            }
+
+            <div class="col-sm-2 col-lg-2 box-product-outer">
+                <div class="box-product">
+                    <div class="img-wrapper">
+                        <a href="@Url.Action("BookDetail", "Book", new { id = item.BOOKID })">
+                            <div class="img-innerWrapper slidable" id="@item.BOOKID" style="background-image:url('@bookImage.ElementAt(0).IMAGEPATH'); background-size:100%; height:250px" onmouseout="unloadImage()" onmouseover="loadImages(@json.Serialize(imagesPath), '@item.BOOKID')"> </div>
+                        </a>
+                        <div class="tags">
+                            <span class="label-tags"><span class="label label-default arrowed">New</span></span>
+                        </div>
+                        <div class="tags tags-left">
+                            <span class="label-tags"><span class="label label-danger arrowed-right">Sale</span></span>
+                        </div>
+                        <div class="option" style="height:60px">
+
+                            @{
+                                int counter = 0;
+                            }
+                            @foreach (var img in bookImage)
+                            {
+                                if (counter >= 3)
+                                {
+                                    continue;
+                                }
+                                <img src="@img.IMAGEPATH" height="70%" onmouseover="imgChange(this,'@item.BOOKID')" class="addtionImgDiv" />
+                                counter++;
+                            }
+                            <br>
+
+
+                            @if (loginSession.AuthenticatedUser() == null)
+                            {
+                                <a onclick="loginRequired()" data-toggle="tooltip" title="Add to Wishlist" class="wishlist"><i class="fa fa-heart"></i></a>
+                            }
+
+                            else if (loginSession.ISCustomer())
+                            {
+                                if (!WishListModel.Exist(loginSession.AuthenticatedUser().USERID, item.BOOKID))
+                                {
+                                    <a onclick="addToWishList(@item.BOOKID)" data-toggle="tooltip" title="Add to Wishlist" class="wishlist"><i class="fa fa-heart"></i></a>
+                                }
+                            }
+
+
+                        </div>
+
+                    </div>
+                    <h6><a href="detail.html"> @item.NAME </a></h6>
+                    <div class="price">
+                        <div>$@(item.PRICE - ((item.PRICE * item.PERCENTAGE_OFF) / 100) ) <span class="label-tags"><span class="label label-default">-@item.PERCENTAGE_OFF%</span></span></div>
+                        <span class="price-old">$@item.PRICE</span>
+                    </div>
+                    <div class="rating">
+
+                    </div>
+                </div>
+          </div>
+
+        }
+
+</div>
+
+
+
+    <script>
+    var pos = 0;
+    var tOut;
+    function loadImages(list, id) {
+        clearTimeout(tOut);
+        tOut = setInterval(function () {
+            if (pos >= list.length) {
+                pos=0;
+            }
+            $('#' + id).attr('style', 'background-image:url(' + list[pos] + '); background-size:100%; height:250px');
+            pos++;
+        }
+        , 1000);
+    }
+
+    function unloadImage() {
+        clearTimeout(tOut);
+    }
+
+    function imgChange(control, id){
+        $('#' + id).attr('style', 'background-image:url(' + control.src + '); background-size:100%; height:250px');
+    }
+    </script>

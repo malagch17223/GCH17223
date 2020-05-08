@@ -1,0 +1,118 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.BOOK>
+@using BSMS.Session;
+@using BSMS.bsms.localhost;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LDashBoard.cshtml";
+    ViewBag.Page = "Book";
+    ViewBag.Action = "List Books";
+    BSMS.Session.SessionHandler loginSession = new BSMS.Session.SessionHandler();
+}
+
+<div class="container">
+    @if (loginSession.ISStaff())
+    {
+        <a href="@Url.Action("AddBook", "Book")" class="btn pull-right btn-success"> Add New </a>
+    }
+    <br><br />
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookImage = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == item.BOOKID);
+            <div class="col-lg-4 col-xlg-3 col-md-5" id="@("book_"+ item.BOOKID)">
+                <div class="card">
+                    <div class="card-block">
+                        <center class="m-t-30">
+                            <img src="@bookImage.ElementAt(0).IMAGEPATH" class="img-circle" height="200" style="border-radius:0px" />
+                            <h4 class="card-title m-t-10">@item.NAME </h4>
+                            <h6 class="card-subtitle"> @BSMS.Models.AuthorModel.ReducedText(200, item.SYNOPOSIS) </h6>
+                           @if (loginSession.ISStaff())
+                           {
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4">
+                                    <a href='@Url.Action("Edit", "Book", new { id=item.BOOKID })'>  <span class="fa fa-edit fa-1x"></span> </a>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <a href='@Url.Action("Detail", "Book", new { id=item.BOOKID })'>  <span class="fa fa-eye fa-1x"></span> </a>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <a onclick="DeleteBook(@item.BOOKID)"> <span class="fa fa-remove fa-1x"> </span> </a>
+                                </div>
+                            </div>
+                           }
+                        </center>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+
+      function DeleteBook(id) {
+
+        swal({
+            title: 'Delete Book Operation',
+            text: "Are you sure you want to continue ?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete This!'
+        }).then(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "Book")',
+                data: { id: id },
+                dataType: "text",
+                success: function (resultData) {
+                    document.getElementById('book_' + id).setAttribute("hidden", "");
+                    swal({
+                        title: 'Delete Request Completed',
+                        text: 'Book have been successfully remove from BSMS',
+                        type: 'success'
+                    })
+                },
+                error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    swal({
+                        title:'Delete Request Error',
+                        text:jqXHR.responseText,
+                        type:'error'
+                    })
+                },
+            })
+
+        }, function (dismiss) {
+            // dismiss can be 'cancel', 'overlay',
+            // 'close', and 'timer'
+            if (dismiss === 'cancel') {
+                swal(
+                  'Aborted',
+                  'Operation Aborted by user',
+                  'info'
+                )
+            }
+        })
+    }
+
+</script>

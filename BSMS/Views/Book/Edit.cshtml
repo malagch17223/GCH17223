@@ -1,0 +1,292 @@
+﻿
+@model BSMS.bsms.localhost.BOOK
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.Page = "Book";
+    ViewBag.Action = "Edit Book";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<style type="text/css">
+ 
+
+    /* container properties */
+    .scrollPane{
+        max-height:280px; 
+         overflow-y:hidden;
+         overflow-x:hidden;
+      
+    }
+    .scrollPane:hover {
+        overflow-y:scroll;
+        overflow-x:hidden;
+    }
+
+    /* customize scrollbar css */
+    #scrollbar-custom::-webkit-scrollbar {
+        width: 6px;
+        background-color: #cccccc;
+    }
+
+        #scrollbar-custom::-webkit-scrollbar:horizontal {
+            height: 6px;
+        }
+
+    #scrollbar-custom::-webkit-scrollbar-track {
+        border: 1px #787878 solid;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 0 6px #c8c8c8 inset;
+    }
+
+    #scrollbar-custom::-webkit-scrollbar-thumb {
+        background-color: #b03c3f;
+        border: 1px solid #000000;
+        border-radius: 10px;
+    }
+
+        #scrollbar-custom::-webkit-scrollbar-thumb:hover {
+            background-color: #bf4649;
+            border: 1px solid #333333;
+        }
+
+        #scrollbar-custom::-webkit-scrollbar-thumb:active {
+            background-color: #a6393d;
+            border: 1px solid #333333;
+        }
+</style>
+
+<div class="container">
+@using (Html.BeginForm("Edit", "Book", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-material", id = "EditForm" }))
+{
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+        <div class="card">
+            <div class="card-block">
+
+              
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.BOOKID)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ISBN_NUMBER, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.ISBN_NUMBER, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ISBN_NUMBER, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control", oninput = "nameChange('name','nameContainer')", id = "name" } })
+                                @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SYNOPOSIS, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.SYNOPOSIS, new { htmlAttributes = new { @class = "form-control", oninput = "nameChange('synposis','synposisContainer')", id = "synposis" } })
+                                @Html.ValidationMessageFor(model => model.SYNOPOSIS, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.REFERENCE, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.REFERENCE, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.REFERENCE, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                         
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PRICE, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.PRICE, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PRICE, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PERCENTAGE_OFF, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.PERCENTAGE_OFF, new { htmlAttributes = new { @class = "form-control", max = "100" } })
+                                @Html.ValidationMessageFor(model => model.PERCENTAGE_OFF, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.GENREID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("GENREID", null, new { @class = "form-control", required = "true" })
+                                @Html.ValidationMessageFor(model => model.GENREID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PRODUCERID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("PRODUCERID", null, new { @class = "form-control", required = "true" })
+                                @Html.ValidationMessageFor(model => model.PRODUCERID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LANGUAGEID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("LANGUAGEID", null, new { @class = "form-control", required = "true" })
+                                @Html.ValidationMessageFor(model => model.LANGUAGEID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-12"> Book Images </label>
+                            <br>
+                            <div class="col-md-12">
+                                <input type="file" name="bookImages" multiple class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-12"> Book SoftCopy </label>
+                            <br>
+                            <div class="col-md-12">
+                                <input type="file" name="bookSoftCopy" multiple class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+                  
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6" >
+
+
+        @{
+            string imgPath = "";
+            if (Model != null)
+            {
+                imgPath = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == Model.BOOKID).ElementAt(0).IMAGEPATH;
+            }
+
+        }
+            <div class="col-lg-12 col-xlg-12 col-md-5">
+                <div class="card">
+                    <div class="card-block">
+                        <center class="m-t-30">
+                           
+                             <img src="@imgPath" class="img-circle" height="200" style="border-radius:0px" />
+                            <h4 class="card-title m-t-10" id="nameContainer">@Model.NAME </h4>
+                            <h6 class="card-subtitle" id="synposisContainer"> @BSMS.Models.AuthorModel.ReducedText(200, Model.SYNOPOSIS) </h6>
+                           
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+            <!--Author List-->
+            <div class="card">
+                <div class="card-block">
+                    <small>Select Translated From </small>
+                    <div class="scrollPane" id="scrollbar-custom">
+                        <div class="row">
+
+                            @foreach (var item in BSMS.Models.BookModel.GetBooks())
+                            {
+
+                                if (item.BOOKID == Model.BOOKID)
+                                {
+                                    continue;
+                                }
+
+                                IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookI = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == item.BOOKID);
+
+
+                                <div class="col-lg-4 col-xlg-4 col-md-5" id="@("book_" + item.BOOKID)">
+
+                                    <center class="m-t-30">
+                                        <img src="@bookI.ElementAt(0).IMAGEPATH" height="70" />
+                                        <div class="roundedOne">
+                                            @if (item.BOOKID == Model.TRANSLATEDFROM)
+                                            {
+                                            
+                                                <input type="radio" name="TRANSLATEDFROM" value="@item.BOOKID" checked>
+                                            }
+                                            else
+                                            {
+                                                <input type="radio" name="TRANSLATEDFROM" value="@item.BOOKID">
+                                            }
+                                            <h4 class="card-title m-t-10">@item.NAME </h4>
+                                        </div>
+                                    </center>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--Author List-->
+            <div class="card">
+                <div class="card-block">
+                    <div class="scrollPane" id="scrollbar-custom">
+                        <small> Select Author Of This Book </small>
+                        <div class="row">
+
+                            @foreach (var item in BSMS.Models.AuthorModel.GetAuthors())
+                            {
+                                <div class="col-lg-4 col-xlg-4 col-md-5" id="@("author_" + item.AUTHORID)">
+
+                                    <center class="m-t-30">
+                                        <img src="@item.THUMBNAIL_PATH" class="img-circle" height="70" />
+                                        <div class="">
+                                            @if (!BSMS.Models.AuthorModel.BookAuthorExist(Model.BOOKID, item.AUTHORID))
+                                            {
+                                                <input type="checkbox" name="Authors" value="@item.AUTHORID">
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="Authors" value="@item.AUTHORID" checked>
+                                            }
+                                            <h4 class="card-title m-t-10">@item.FIRSTNAME @item.MIDDLENAME @item.LASTNAME</h4>
+                                        </div>
+                                    </center>
+                                </div>
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+</div>
+           
+</div>
+    <div class="row">
+        <div class="form-group">
+            <center>
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save Changes" class="btn btn-default" width="50%" />
+                </div>
+            </center>
+        </div>
+    </div>
+            }
+</div>
+
+<script>
+    function nameChange(inputContainer,valueContainer) {
+        document.getElementById(valueContainer).innerHTML = document.getElementById(inputContainer).value;
+    }
+
+</script>

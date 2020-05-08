@@ -1,0 +1,104 @@
+﻿@model BSMS.bsms.localhost.GENRE
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.Page = "Genre";
+    ViewBag.Action = "Edit Genre";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            @using (Html.BeginForm("Edit", "Genre", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-material" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.GENREID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control", required="true" } })
+                            @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DESCRIPTION, htmlAttributes: new { @class = "control-label col-md-2", required="true" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DESCRIPTION, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DESCRIPTION, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.REFERENCE_KEY, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.REFERENCE_KEY, new { htmlAttributes = new { @class = "form-control", required="true" } })
+                            @Html.ValidationMessageFor(model => model.REFERENCE_KEY, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <script>
+
+        var message = '@ViewBag.Message';
+        swal({
+            title: 'Walting',
+            text: 'BSMS is processing your request',
+            timer: 10000,
+            type: 'error',
+            background: '#fff url(http://www.planwallpaper.com/static/images/518151-backgrounds_W3qVPu2.jpg)'
+        }).then(
+        function () { },
+// handling the promise rejection
+            function (dismiss) {
+                swal(
+              'Information Message',
+                message,
+              'info'
+            )
+                setTimeout(donothing, 5000);
+                window.location = '@Url.Action("Index","Genre")';
+            }
+        )
+
+        function donothing() {
+
+        }
+
+    </script>
+}
+
+
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <script>
+        var message = '@ViewBag.ErrorMessage';
+        swal({
+            title: 'Error Message',
+            text: message,
+            type: 'error',
+            background: '#fff url(http://www.planwallpaper.com/static/images/518151-backgrounds_W3qVPu2.jpg)'
+        })
+    </script>
+}

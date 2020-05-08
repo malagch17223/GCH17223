@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.WATCHLIST>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("index","home")">Home</a></li>
+            <li class="active">Wish List</li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookImage = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == item.BOOKID);
+        <div class="col-sm-2 col-lg-2 box-product-outer" id="@("wishlist"+item.WATCHLISTID)">
+            <div class="box-product">
+                <div class="img-wrapper">
+                    <a href="@Url.Action("BookDetail", "Book", new { id = item.BOOKID })">
+                        <div class="img-innerWrapper" style="background-image:url('@bookImage.ElementAt(0).IMAGEPATH'); background-size:100%; height:230px"> </div>
+                    </a>
+                    <div class="tags">
+                        <span class="label-tags"><span class="label label-default arrowed">New</span></span>
+                    </div>
+                    <div class="tags tags-left">
+                        <span class="label-tags"><span class="label label-danger arrowed-right">Sale</span></span>
+                    </div>
+                    <div class="option">
+                        <a href="#" data-toggle="tooltip" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+                        <a href="#" data-toggle="tooltip" title="Add to Compare"><i class="fa fa-align-left"></i></a>
+                        <a href="javascript:void(0)" onclick="RemoveWatchList(@item.WATCHLISTID)" data-toggle="tooltip" title="Remove from WishList"><i class="fa fa-remove"></i></a>
+                       
+                    </div>
+                </div>
+                <h6><a href="detail.html"> @item.BOOK.NAME </a></h6>
+                <div class="price">
+                    <div>$@(item.BOOK.PRICE - ((item.BOOK.PRICE * item.BOOK.PERCENTAGE_OFF) / 100) ) <span class="label-tags"><span class="label label-default">-@item.BOOK.PERCENTAGE_OFF%</span></span></div>
+                    <span class="price-old">$@item.BOOK.PRICE</span>
+                </div>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <a href="#">(5 reviews)</a>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+</div>

@@ -1,0 +1,49 @@
+﻿@model BSMS.bsms.localhost.GENRE
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Page = "Genre";
+    ViewBag.Action = "Category Detail";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+
+            <div>
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NAME)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NAME)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DESCRIPTION)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DESCRIPTION)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.REFERENCE_KEY)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.REFERENCE_KEY)
+                    </dd>
+
+                </dl>
+
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.GENREID }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+        </div>
+        </div></div>

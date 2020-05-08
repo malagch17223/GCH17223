@@ -1,0 +1,55 @@
+﻿@model BSMS.bsms.localhost.PRODUCER
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Page = "Producer";
+    ViewBag.Action = "Producer Information";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+
+<div>
+    <div class="card">
+        <div class="card-block">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.NAME)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NAME)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ADDRESS)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ADDRESS)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CONTACT)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CONTACT)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EMAIL)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EMAIL)
+                </dd>
+
+            </dl>
+       
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.PRODUCERID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+        </div>
+</div>
+</div>

@@ -1,0 +1,146 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.USER>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Page = "Staff";
+    ViewBag.Action = "List Staff";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<style type="text/css">
+    .staffcard{
+        transition: width 2s;
+    }
+    .staffcard:hover{
+        width:10px
+    }
+</style>
+
+<div class="container">
+
+    <p>
+        <a href="@Url.Action("AddStaff","Staff")">
+            <span class="fa fa-plus-circle"></span>
+        </a>
+    </p>
+
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            string img_Path = (item.THUMBNAIL_PATH == null || String.IsNullOrEmpty(item.THUMBNAIL_PATH)) ? "/UserImages/avatar.png" : @item.THUMBNAIL_PATH;
+            <div class="col-lg-4 col-xlg-3 col-md-5" id="@("staff_"+ item.USERID)">
+                <div class="card">
+                    <div class="card-block">
+                        <center class="m-t-30">
+                            <img src="@item.THUMBNAIL_PATH" class="img-circle" height="150"  />
+                            <h4 class="card-title m-t-10">@item.FIRSTNAME @item.MIDDLENAME @item.LASTNAME</h4>
+                            <h6 class="card-subtitle"> @item.EMAIL <br> @item.ROLE.ROLE1 </h6>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4">
+                                    <a href="@Url.Action("ViewProfile", new { id = item.USERID })"  style="width:33%">
+                                        <span class="fa fa-eye"></span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <a  style="width:33%" onclick="confirmDelete(@item.USERID)">
+                                        <span class="fa fa-remove"></span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <a  style="width:33%" href='@Url.Action("UpdateStaff", new { id = item.USERID })'>
+                                        <span class="fa fa-edit"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<script>
+
+    function ViewDetail(id) {
+
+        $.sweetModal({
+            title: 'HTML Content',
+
+            theme: $.sweetModal.THEME_DARK
+        });
+
+    }
+
+
+    function confirmDelete(id) {
+        DeleteUser(id);
+    }
+
+
+
+    function DeleteUser(id) {
+
+        swal({
+            title: 'Delete Staff Operation',
+            text: "Are you sure you want to continue ?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete This!'
+        }).then(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "Staff")',
+                data: { id: id },
+                dataType: "text",
+                success: function (resultData) {
+                    document.getElementById('staff_' + id).setAttribute("hidden", "");
+                    swal({
+                        title: 'Delete Request Completed',
+                        text: 'Staff have been successfully remove from BSMS',
+                        type: 'success'
+                    })
+                },
+                error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    swal({
+                        title:'Delete Request Error',
+                        text:msg,
+                        type:'error'
+                    })
+                },
+            })
+
+        }, function (dismiss) {
+            // dismiss can be 'cancel', 'overlay',
+            // 'close', and 'timer'
+            if (dismiss === 'cancel') {
+                swal(
+                  'Aborted',
+                  'Operation Aborted by user',
+                  'info'
+                )
+            }
+        })
+    }
+
+</script>

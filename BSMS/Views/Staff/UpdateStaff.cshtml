@@ -1,0 +1,130 @@
+﻿@model BSMS.bsms.localhost.USER
+
+@{
+    ViewBag.Title = "UpdateStaff";
+    ViewBag.Page = "Staff";
+    ViewBag.Action = "Update Staff";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+
+            @using (Html.BeginForm("UpdateStaff", "Staff", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-material" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>Update User</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.USERID)
+
+                    <div class="form-group">
+                        *
+                        @Html.LabelFor(model => model.USERNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control form-control-line",required="true" } })
+                            @Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        *
+                        @Html.LabelFor(model => model.FIRSTNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FIRSTNAME, new { htmlAttributes = new { @class = "form-control form-control-line", required="true" } })
+                            @Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LASTNAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LASTNAME, new { htmlAttributes = new { @class = "form-control form-control-line", required="true" } })
+                            @Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MIDDLENAME, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MIDDLENAME, new { htmlAttributes = new { @class = "form-control form-control-line" } })
+                            @Html.ValidationMessageFor(model => model.MIDDLENAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="thumbnail" class="control-label col-md-2"> Profile Photo </label>
+                        <div class="col-md-10">
+                            <input type="file" name="thumbnail" class="form-control form-control-line" />
+                            @Html.ValidationMessageFor(model => model.THUMBNAIL_PATH, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        *
+                        @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control form-control-line", required="true" } })
+                            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+</div>
+    </div>
+
+
+
+
+        @if (!String.IsNullOrEmpty(ViewBag.Message))
+        {
+            <script>
+
+                var message = '@ViewBag.Message';
+                swal({
+                    title: 'Walting',
+                    text: 'BSMS is Processing your Request',
+                    timer: 3000,
+                    type: 'error',
+                    background: '#fff url(http://www.planwallpaper.com/static/images/518151-backgrounds_W3qVPu2.jpg)'
+                }).then(
+                function () { },
+        // handling the promise rejection
+                    function (dismiss) {
+                        swal(
+                      'Information Message',
+                        message,
+                      'info'
+                    )
+                        window.location = '@Url.Action("Index","Staff")';
+                    }
+                )
+
+            </script>
+        }
+
+
+        @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <script>
+                var message = '@ViewBag.ErrorMessage';
+                swal({
+                    title: 'Error Message',
+                    text: message,
+                    type: 'error',
+                    background: '#fff url(http://www.planwallpaper.com/static/images/518151-backgrounds_W3qVPu2.jpg)'
+                })
+            </script>
+        }
+

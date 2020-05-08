@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.PRODUCER>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Page = "Producer";
+    ViewBag.Action = "List Producers";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NAME)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ADDRESS)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CONTACT)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EMAIL)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr id="@("producer_"+item.PRODUCERID)">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ADDRESS)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CONTACT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EMAIL)
+                        </td>
+                        <td>
+                            <a href='\Producer\Edit\@item.PRODUCERID'>
+                                <span class="fa fa-edit"></span>
+                            </a> |
+                            <a href='\Producer\Details\@item.PRODUCERID'>
+                                <span class="fa fa-info-circle"></span>
+                            </a> |
+                            <a onclick="DeleteRequest('@Url.Action("Delete", "Producer", new { id = item.PRODUCERID})', '@("producer_"+item.PRODUCERID)' )">
+                                <span class="fa fa-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+</div></div>

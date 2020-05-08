@@ -1,0 +1,2620 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SetAsTestContext">
+        <s:complexType />
+      </s:element>
+      <s:element name="SetAsTestContextResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:USER" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="USER">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="USERID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="USERNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PASSWORDHASH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FIRSTNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LASTNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MIDDLENAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THUMBNAIL_PATH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMAIL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ROLEID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLE" type="tns:ROLE" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ROLE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ROLEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ROLE1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateUserResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="tns:USER" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUserResult" type="tns:USER" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoles">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRolesResult" type="tns:ArrayOfROLE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfROLE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ROLE" nillable="true" type="tns:ROLE" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUsers">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsersResult" type="tns:ArrayOfUSER" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUSER">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="USER" nillable="true" type="tns:USER" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategoriesResult" type="tns:ArrayOfCATEGORY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCATEGORY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CATEGORY" nillable="true" type="tns:CATEGORY" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CATEGORY">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CATEGORYID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESCRIPTION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REFERENCE_KEY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CATEGORY_THUMBNAIL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="tns:CATEGORY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCategoryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InserCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cat" type="tns:CATEGORY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserCategoryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="catID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteCategoryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetGenres">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetGenresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGenresResult" type="tns:ArrayOfGENRE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGENRE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GENRE" nillable="true" type="tns:GENRE" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GENRE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="GENREID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DESCRIPTION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REFERENCE_KEY" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateGenre">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="genre" type="tns:GENRE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateGenreResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InserGenre">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="genre" type="tns:GENRE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InserGenreResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteGenre">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="genID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteGenreResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="uID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAuthors">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAuthorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAuthorsResult" type="tns:ArrayOfAUTHOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAUTHOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AUTHOR" nillable="true" type="tns:AUTHOR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AUTHOR">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AUTHORID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FIRSTNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LASTNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MIDDLENAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BIOGRAPHY" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ALIASNAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="THUMBNAIL_PATH" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAuthorResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="author" type="tns:AUTHOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAuthorResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="author" type="tns:AUTHOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAuthorResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProducers">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetProducersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProducersResult" type="tns:ArrayOfPRODUCER" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPRODUCER">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PRODUCER" nillable="true" type="tns:PRODUCER" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PRODUCER">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PRODUCERID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ADDRESS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CONTACT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EMAIL" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteProducer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteProducerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertProducer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="producer" type="tns:PRODUCER" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertProducerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateProducer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="producer" type="tns:PRODUCER" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateProducerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="book" type="tns:BOOK" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BOOK">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISBN_NUMBER" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="STATUS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SYNOPOSIS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISPUBLISHED" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="REFERENCE" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DATE_PUBLISHED" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CREATED_DATE" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRICE" nillable="true" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="PERCENTAGE_OFF" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GENREID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="STAFFID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PRODUCERID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TRANSLATEDFROM" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LANGUAGEID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GENRE" type="tns:GENRE" />
+          <s:element minOccurs="0" maxOccurs="1" name="LANGUAGE" type="tns:LANGUAGE" />
+          <s:element minOccurs="0" maxOccurs="1" name="PRODUCER" type="tns:PRODUCER" />
+          <s:element minOccurs="0" maxOccurs="1" name="USER" type="tns:USER" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LANGUAGE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LANGUAGEID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LANGUAGE1" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertBookResult" type="tns:BOOK" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="book" type="tns:BOOK" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBookResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBooks">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBooksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBooksResult" type="tns:ArrayOfBOOK" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBOOK">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BOOK" nillable="true" type="tns:BOOK" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="image" type="tns:BOOK_IMAGE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BOOK_IMAGE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BOOK_IMAGEID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IMAGEPATH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookImageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateBookImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="image" type="tns:BOOK_IMAGE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBookImageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteBookImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookImageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookImages">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookImagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookImagesResult" type="tns:ArrayOfBOOK_IMAGE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBOOK_IMAGE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BOOK_IMAGE" nillable="true" type="tns:BOOK_IMAGE" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bCategory" type="tns:BOOK_CATEGORY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BOOK_CATEGORY">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BOOK_CATEGORYID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CATEGORYID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CATEGORY" type="tns:CATEGORY" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookCategoryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateBookCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bCategory" type="tns:BOOK_CATEGORY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBookCategoryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteBookCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bCategoryID" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookCategoryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookCategoriesResult" type="tns:ArrayOfBOOK_CATEGORY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBOOK_CATEGORY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BOOK_CATEGORY" nillable="true" type="tns:BOOK_CATEGORY" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="author" type="tns:BOOK_AUTHOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BOOK_AUTHOR">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BOOK_AUTHORID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AUTHORID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AUTHOR" type="tns:AUTHOR" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookAuthorResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateBookAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bAuthor" type="tns:BOOK_AUTHOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBookAuthorResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteBookAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bAuthorID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookAuthorResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookAuthors">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookAuthorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookAuthorsResult" type="tns:ArrayOfBOOK_AUTHOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBOOK_AUTHOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BOOK_AUTHOR" nillable="true" type="tns:BOOK_AUTHOR" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookSoftCopy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="copy" type="tns:BOOK_SOFTCOPY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BOOK_SOFTCOPY">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BSCID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VERSION" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FILEPATH" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FILESIZE" nillable="true" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertBookSoftCopyResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateBookSoftCopy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bSoftCopy" type="tns:BOOK_SOFTCOPY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBookSoftCopyResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteBookSoftCopy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bSCID" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteBookSoftCopyResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookSoftCopy">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetBookSoftCopyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookSoftCopyResult" type="tns:ArrayOfBOOK_SOFTCOPY" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBOOK_SOFTCOPY">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BOOK_SOFTCOPY" nillable="true" type="tns:BOOK_SOFTCOPY" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLanguages">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetLanguagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLanguagesResult" type="tns:ArrayOfLANGUAGE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLANGUAGE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LANGUAGE" nillable="true" type="tns:LANGUAGE" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddWishList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddWishListResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetWishList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWishListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWishListResult" type="tns:ArrayOfWATCHLIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfWATCHLIST">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WATCHLIST" nillable="true" type="tns:WATCHLIST" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WATCHLIST">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="WATCHLISTID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="USER" type="tns:USER" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllWishList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllWishListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllWishListResult" type="tns:ArrayOfWATCHLIST" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteWishList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteWishListResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddLike">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="like" type="tns:LIKE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LIKE">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LIKEID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+          <s:element minOccurs="0" maxOccurs="1" name="USER" type="tns:USER" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddLikeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddLikeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveLike">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveLikeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveLikeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllLikes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllLikesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllLikesResult" type="tns:ArrayOfLIKE" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLIKE">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LIKE" nillable="true" type="tns:LIKE" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddAnonymousView">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAnonymousViewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddAnonymousViewResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViews">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetViewsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetViewsResult" type="tns:ArrayOfVIEW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfVIEW">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VIEW" nillable="true" type="tns:VIEW" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VIEW">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="VIEWID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+          <s:element minOccurs="0" maxOccurs="1" name="USER" type="tns:USER" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddRating">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="rating" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddRatingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddRatingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateRating">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="rating" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateRatingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateRatingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRating">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRatingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRatingResult" type="tns:RATING" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RATING">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RATINGID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RATING1" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+          <s:element minOccurs="0" maxOccurs="1" name="USER" type="tns:USER" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRatingByBookId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRatingByBookIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRatingByBookIdResult" type="tns:ArrayOfRATING" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRATING">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RATING" nillable="true" type="tns:RATING" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddReview">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="review" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="userid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddReviewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddReviewResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBookRevieww">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bookid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBookReviewwResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBookReviewwResult" type="tns:ArrayOfREVIEW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfREVIEW">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="REVIEW" nillable="true" type="tns:REVIEW" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="REVIEW">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="REVIEWID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="USERID" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOKID" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="REVIEW1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BOOK" type="tns:BOOK" />
+          <s:element minOccurs="0" maxOccurs="1" name="USER" type="tns:USER" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteReview">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="reviewid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteReviewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteReviewResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReviews">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllReviewsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReviewsResult" type="tns:ArrayOfREVIEW" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SetAsTestContextSoapIn">
+    <wsdl:part name="parameters" element="tns:SetAsTestContext" />
+  </wsdl:message>
+  <wsdl:message name="SetAsTestContextSoapOut">
+    <wsdl:part name="parameters" element="tns:SetAsTestContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="AddUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRoles" />
+  </wsdl:message>
+  <wsdl:message name="GetRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategories" />
+  </wsdl:message>
+  <wsdl:message name="GetCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCategory" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="InserCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:InserCategory" />
+  </wsdl:message>
+  <wsdl:message name="InserCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:InserCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteCategory" />
+  </wsdl:message>
+  <wsdl:message name="DeleteCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGenresSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGenres" />
+  </wsdl:message>
+  <wsdl:message name="GetGenresSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGenresResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateGenreSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateGenre" />
+  </wsdl:message>
+  <wsdl:message name="UpdateGenreSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateGenreResponse" />
+  </wsdl:message>
+  <wsdl:message name="InserGenreSoapIn">
+    <wsdl:part name="parameters" element="tns:InserGenre" />
+  </wsdl:message>
+  <wsdl:message name="InserGenreSoapOut">
+    <wsdl:part name="parameters" element="tns:InserGenreResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteGenreSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteGenre" />
+  </wsdl:message>
+  <wsdl:message name="DeleteGenreSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteGenreResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAuthors" />
+  </wsdl:message>
+  <wsdl:message name="GetAuthorsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAuthorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteAuthor" />
+  </wsdl:message>
+  <wsdl:message name="DeleteAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAuthor" />
+  </wsdl:message>
+  <wsdl:message name="AddAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateAuthor" />
+  </wsdl:message>
+  <wsdl:message name="UpdateAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProducersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProducers" />
+  </wsdl:message>
+  <wsdl:message name="GetProducersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProducersResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteProducerSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteProducer" />
+  </wsdl:message>
+  <wsdl:message name="DeleteProducerSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteProducerResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertProducerSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertProducer" />
+  </wsdl:message>
+  <wsdl:message name="InsertProducerSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertProducerResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProducerSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateProducer" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProducerSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateProducerResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBook" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteBook" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBook" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBooksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBooks" />
+  </wsdl:message>
+  <wsdl:message name="GetBooksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookImageSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBookImage" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookImageSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBookImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookImageSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBookImage" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookImageSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBookImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookImageSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteBookImage" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookImageSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteBookImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBookImagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookImages" />
+  </wsdl:message>
+  <wsdl:message name="GetBookImagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookImagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBookCategory" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBookCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBookCategory" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBookCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteBookCategory" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteBookCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBookCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookCategories" />
+  </wsdl:message>
+  <wsdl:message name="GetBookCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBookAuthor" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBookAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBookAuthor" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBookAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteBookAuthor" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteBookAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBookAuthorsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookAuthors" />
+  </wsdl:message>
+  <wsdl:message name="GetBookAuthorsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookAuthorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookSoftCopySoapIn">
+    <wsdl:part name="parameters" element="tns:InsertBookSoftCopy" />
+  </wsdl:message>
+  <wsdl:message name="InsertBookSoftCopySoapOut">
+    <wsdl:part name="parameters" element="tns:InsertBookSoftCopyResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookSoftCopySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBookSoftCopy" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBookSoftCopySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBookSoftCopyResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookSoftCopySoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteBookSoftCopy" />
+  </wsdl:message>
+  <wsdl:message name="DeleteBookSoftCopySoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteBookSoftCopyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBookSoftCopySoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookSoftCopy" />
+  </wsdl:message>
+  <wsdl:message name="GetBookSoftCopySoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookSoftCopyResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLanguagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLanguages" />
+  </wsdl:message>
+  <wsdl:message name="GetLanguagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLanguagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddWishListSoapIn">
+    <wsdl:part name="parameters" element="tns:AddWishList" />
+  </wsdl:message>
+  <wsdl:message name="AddWishListSoapOut">
+    <wsdl:part name="parameters" element="tns:AddWishListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWishListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWishList" />
+  </wsdl:message>
+  <wsdl:message name="GetWishListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWishListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllWishListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllWishList" />
+  </wsdl:message>
+  <wsdl:message name="GetAllWishListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllWishListResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteWishListSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteWishList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteWishListSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteWishListResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddLikeSoapIn">
+    <wsdl:part name="parameters" element="tns:AddLike" />
+  </wsdl:message>
+  <wsdl:message name="AddLikeSoapOut">
+    <wsdl:part name="parameters" element="tns:AddLikeResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLikeSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveLike" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLikeSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveLikeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllLikesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllLikes" />
+  </wsdl:message>
+  <wsdl:message name="GetAllLikesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllLikesResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAnonymousViewSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAnonymousView" />
+  </wsdl:message>
+  <wsdl:message name="AddAnonymousViewSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAnonymousViewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetViewsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetViews" />
+  </wsdl:message>
+  <wsdl:message name="GetViewsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetViewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddRatingSoapIn">
+    <wsdl:part name="parameters" element="tns:AddRating" />
+  </wsdl:message>
+  <wsdl:message name="AddRatingSoapOut">
+    <wsdl:part name="parameters" element="tns:AddRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRatingSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateRating" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRatingSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRatingSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRating" />
+  </wsdl:message>
+  <wsdl:message name="GetRatingSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRatingByBookIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRatingByBookId" />
+  </wsdl:message>
+  <wsdl:message name="GetRatingByBookIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRatingByBookIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddReviewSoapIn">
+    <wsdl:part name="parameters" element="tns:AddReview" />
+  </wsdl:message>
+  <wsdl:message name="AddReviewSoapOut">
+    <wsdl:part name="parameters" element="tns:AddReviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBookReviewwSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBookRevieww" />
+  </wsdl:message>
+  <wsdl:message name="GetBookReviewwSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBookReviewwResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteReviewSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteReview" />
+  </wsdl:message>
+  <wsdl:message name="DeleteReviewSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteReviewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReviewsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReviews" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReviewsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReviewsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="bsms_serviceSoap">
+    <wsdl:operation name="SetAsTestContext">
+      <wsdl:input message="tns:SetAsTestContextSoapIn" />
+      <wsdl:output message="tns:SetAsTestContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input message="tns:UpdateUserSoapIn" />
+      <wsdl:output message="tns:UpdateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input message="tns:AddUserSoapIn" />
+      <wsdl:output message="tns:AddUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <wsdl:input message="tns:GetRolesSoapIn" />
+      <wsdl:output message="tns:GetRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input message="tns:GetUsersSoapIn" />
+      <wsdl:output message="tns:GetUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <wsdl:input message="tns:GetCategoriesSoapIn" />
+      <wsdl:output message="tns:GetCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <wsdl:input message="tns:UpdateCategorySoapIn" />
+      <wsdl:output message="tns:UpdateCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InserCategory">
+      <wsdl:input message="tns:InserCategorySoapIn" />
+      <wsdl:output message="tns:InserCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCategory">
+      <wsdl:input message="tns:DeleteCategorySoapIn" />
+      <wsdl:output message="tns:DeleteCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGenres">
+      <wsdl:input message="tns:GetGenresSoapIn" />
+      <wsdl:output message="tns:GetGenresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGenre">
+      <wsdl:input message="tns:UpdateGenreSoapIn" />
+      <wsdl:output message="tns:UpdateGenreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InserGenre">
+      <wsdl:input message="tns:InserGenreSoapIn" />
+      <wsdl:output message="tns:InserGenreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGenre">
+      <wsdl:input message="tns:DeleteGenreSoapIn" />
+      <wsdl:output message="tns:DeleteGenreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input message="tns:DeleteUserSoapIn" />
+      <wsdl:output message="tns:DeleteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthors">
+      <wsdl:input message="tns:GetAuthorsSoapIn" />
+      <wsdl:output message="tns:GetAuthorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAuthor">
+      <wsdl:input message="tns:DeleteAuthorSoapIn" />
+      <wsdl:output message="tns:DeleteAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAuthor">
+      <wsdl:input message="tns:AddAuthorSoapIn" />
+      <wsdl:output message="tns:AddAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAuthor">
+      <wsdl:input message="tns:UpdateAuthorSoapIn" />
+      <wsdl:output message="tns:UpdateAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProducers">
+      <wsdl:input message="tns:GetProducersSoapIn" />
+      <wsdl:output message="tns:GetProducersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProducer">
+      <wsdl:input message="tns:DeleteProducerSoapIn" />
+      <wsdl:output message="tns:DeleteProducerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertProducer">
+      <wsdl:input message="tns:InsertProducerSoapIn" />
+      <wsdl:output message="tns:InsertProducerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProducer">
+      <wsdl:input message="tns:UpdateProducerSoapIn" />
+      <wsdl:output message="tns:UpdateProducerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBook">
+      <wsdl:input message="tns:InsertBookSoapIn" />
+      <wsdl:output message="tns:InsertBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBook">
+      <wsdl:input message="tns:DeleteBookSoapIn" />
+      <wsdl:output message="tns:DeleteBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBook">
+      <wsdl:input message="tns:UpdateBookSoapIn" />
+      <wsdl:output message="tns:UpdateBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBooks">
+      <wsdl:input message="tns:GetBooksSoapIn" />
+      <wsdl:output message="tns:GetBooksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookImage">
+      <wsdl:input message="tns:InsertBookImageSoapIn" />
+      <wsdl:output message="tns:InsertBookImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookImage">
+      <wsdl:input message="tns:UpdateBookImageSoapIn" />
+      <wsdl:output message="tns:UpdateBookImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookImage">
+      <wsdl:input message="tns:DeleteBookImageSoapIn" />
+      <wsdl:output message="tns:DeleteBookImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookImages">
+      <wsdl:input message="tns:GetBookImagesSoapIn" />
+      <wsdl:output message="tns:GetBookImagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookCategory">
+      <wsdl:input message="tns:InsertBookCategorySoapIn" />
+      <wsdl:output message="tns:InsertBookCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookCategory">
+      <wsdl:input message="tns:UpdateBookCategorySoapIn" />
+      <wsdl:output message="tns:UpdateBookCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookCategory">
+      <wsdl:input message="tns:DeleteBookCategorySoapIn" />
+      <wsdl:output message="tns:DeleteBookCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookCategories">
+      <wsdl:input message="tns:GetBookCategoriesSoapIn" />
+      <wsdl:output message="tns:GetBookCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookAuthor">
+      <wsdl:input message="tns:InsertBookAuthorSoapIn" />
+      <wsdl:output message="tns:InsertBookAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookAuthor">
+      <wsdl:input message="tns:UpdateBookAuthorSoapIn" />
+      <wsdl:output message="tns:UpdateBookAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookAuthor">
+      <wsdl:input message="tns:DeleteBookAuthorSoapIn" />
+      <wsdl:output message="tns:DeleteBookAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookAuthors">
+      <wsdl:input message="tns:GetBookAuthorsSoapIn" />
+      <wsdl:output message="tns:GetBookAuthorsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookSoftCopy">
+      <wsdl:input message="tns:InsertBookSoftCopySoapIn" />
+      <wsdl:output message="tns:InsertBookSoftCopySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookSoftCopy">
+      <wsdl:input message="tns:UpdateBookSoftCopySoapIn" />
+      <wsdl:output message="tns:UpdateBookSoftCopySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookSoftCopy">
+      <wsdl:input message="tns:DeleteBookSoftCopySoapIn" />
+      <wsdl:output message="tns:DeleteBookSoftCopySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookSoftCopy">
+      <wsdl:input message="tns:GetBookSoftCopySoapIn" />
+      <wsdl:output message="tns:GetBookSoftCopySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLanguages">
+      <wsdl:input message="tns:GetLanguagesSoapIn" />
+      <wsdl:output message="tns:GetLanguagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddWishList">
+      <wsdl:input message="tns:AddWishListSoapIn" />
+      <wsdl:output message="tns:AddWishListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWishList">
+      <wsdl:input message="tns:GetWishListSoapIn" />
+      <wsdl:output message="tns:GetWishListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWishList">
+      <wsdl:input message="tns:GetAllWishListSoapIn" />
+      <wsdl:output message="tns:GetAllWishListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWishList">
+      <wsdl:input message="tns:DeleteWishListSoapIn" />
+      <wsdl:output message="tns:DeleteWishListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddLike">
+      <wsdl:input message="tns:AddLikeSoapIn" />
+      <wsdl:output message="tns:AddLikeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLike">
+      <wsdl:input message="tns:RemoveLikeSoapIn" />
+      <wsdl:output message="tns:RemoveLikeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLikes">
+      <wsdl:input message="tns:GetAllLikesSoapIn" />
+      <wsdl:output message="tns:GetAllLikesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAnonymousView">
+      <wsdl:input message="tns:AddAnonymousViewSoapIn" />
+      <wsdl:output message="tns:AddAnonymousViewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViews">
+      <wsdl:input message="tns:GetViewsSoapIn" />
+      <wsdl:output message="tns:GetViewsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <wsdl:input message="tns:AddRatingSoapIn" />
+      <wsdl:output message="tns:AddRatingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRating">
+      <wsdl:input message="tns:UpdateRatingSoapIn" />
+      <wsdl:output message="tns:UpdateRatingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <wsdl:input message="tns:GetRatingSoapIn" />
+      <wsdl:output message="tns:GetRatingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRatingByBookId">
+      <wsdl:input message="tns:GetRatingByBookIdSoapIn" />
+      <wsdl:output message="tns:GetRatingByBookIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddReview">
+      <wsdl:input message="tns:AddReviewSoapIn" />
+      <wsdl:output message="tns:AddReviewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookRevieww">
+      <wsdl:input message="tns:GetBookReviewwSoapIn" />
+      <wsdl:output message="tns:GetBookReviewwSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReview">
+      <wsdl:input message="tns:DeleteReviewSoapIn" />
+      <wsdl:output message="tns:DeleteReviewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReviews">
+      <wsdl:input message="tns:GetAllReviewsSoapIn" />
+      <wsdl:output message="tns:GetAllReviewsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="bsms_serviceSoap" type="tns:bsms_serviceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetAsTestContext">
+      <soap:operation soapAction="http://tempuri.org/SetAsTestContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <soap:operation soapAction="http://tempuri.org/GetRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://tempuri.org/GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <soap:operation soapAction="http://tempuri.org/GetCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <soap:operation soapAction="http://tempuri.org/UpdateCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserCategory">
+      <soap:operation soapAction="http://tempuri.org/InserCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCategory">
+      <soap:operation soapAction="http://tempuri.org/DeleteCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenres">
+      <soap:operation soapAction="http://tempuri.org/GetGenres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGenre">
+      <soap:operation soapAction="http://tempuri.org/UpdateGenre" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserGenre">
+      <soap:operation soapAction="http://tempuri.org/InserGenre" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGenre">
+      <soap:operation soapAction="http://tempuri.org/DeleteGenre" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthors">
+      <soap:operation soapAction="http://tempuri.org/GetAuthors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAuthor">
+      <soap:operation soapAction="http://tempuri.org/DeleteAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAuthor">
+      <soap:operation soapAction="http://tempuri.org/AddAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAuthor">
+      <soap:operation soapAction="http://tempuri.org/UpdateAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProducers">
+      <soap:operation soapAction="http://tempuri.org/GetProducers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProducer">
+      <soap:operation soapAction="http://tempuri.org/DeleteProducer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProducer">
+      <soap:operation soapAction="http://tempuri.org/InsertProducer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProducer">
+      <soap:operation soapAction="http://tempuri.org/UpdateProducer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBook">
+      <soap:operation soapAction="http://tempuri.org/InsertBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBook">
+      <soap:operation soapAction="http://tempuri.org/DeleteBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBook">
+      <soap:operation soapAction="http://tempuri.org/UpdateBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBooks">
+      <soap:operation soapAction="http://tempuri.org/GetBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookImage">
+      <soap:operation soapAction="http://tempuri.org/InsertBookImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookImage">
+      <soap:operation soapAction="http://tempuri.org/UpdateBookImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookImage">
+      <soap:operation soapAction="http://tempuri.org/DeleteBookImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookImages">
+      <soap:operation soapAction="http://tempuri.org/GetBookImages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookCategory">
+      <soap:operation soapAction="http://tempuri.org/InsertBookCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookCategory">
+      <soap:operation soapAction="http://tempuri.org/UpdateBookCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookCategory">
+      <soap:operation soapAction="http://tempuri.org/DeleteBookCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookCategories">
+      <soap:operation soapAction="http://tempuri.org/GetBookCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookAuthor">
+      <soap:operation soapAction="http://tempuri.org/InsertBookAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookAuthor">
+      <soap:operation soapAction="http://tempuri.org/UpdateBookAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookAuthor">
+      <soap:operation soapAction="http://tempuri.org/DeleteBookAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookAuthors">
+      <soap:operation soapAction="http://tempuri.org/GetBookAuthors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookSoftCopy">
+      <soap:operation soapAction="http://tempuri.org/InsertBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookSoftCopy">
+      <soap:operation soapAction="http://tempuri.org/UpdateBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookSoftCopy">
+      <soap:operation soapAction="http://tempuri.org/DeleteBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookSoftCopy">
+      <soap:operation soapAction="http://tempuri.org/GetBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLanguages">
+      <soap:operation soapAction="http://tempuri.org/GetLanguages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddWishList">
+      <soap:operation soapAction="http://tempuri.org/AddWishList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWishList">
+      <soap:operation soapAction="http://tempuri.org/GetWishList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWishList">
+      <soap:operation soapAction="http://tempuri.org/GetAllWishList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWishList">
+      <soap:operation soapAction="http://tempuri.org/DeleteWishList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLike">
+      <soap:operation soapAction="http://tempuri.org/AddLike" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLike">
+      <soap:operation soapAction="http://tempuri.org/RemoveLike" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLikes">
+      <soap:operation soapAction="http://tempuri.org/GetAllLikes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnonymousView">
+      <soap:operation soapAction="http://tempuri.org/AddAnonymousView" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViews">
+      <soap:operation soapAction="http://tempuri.org/GetViews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <soap:operation soapAction="http://tempuri.org/AddRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRating">
+      <soap:operation soapAction="http://tempuri.org/UpdateRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <soap:operation soapAction="http://tempuri.org/GetRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRatingByBookId">
+      <soap:operation soapAction="http://tempuri.org/GetRatingByBookId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddReview">
+      <soap:operation soapAction="http://tempuri.org/AddReview" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookRevieww">
+      <soap:operation soapAction="http://tempuri.org/GetBookRevieww" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReview">
+      <soap:operation soapAction="http://tempuri.org/DeleteReview" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReviews">
+      <soap:operation soapAction="http://tempuri.org/GetAllReviews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="bsms_serviceSoap12" type="tns:bsms_serviceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetAsTestContext">
+      <soap12:operation soapAction="http://tempuri.org/SetAsTestContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://tempuri.org/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap12:operation soapAction="http://tempuri.org/AddUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoles">
+      <soap12:operation soapAction="http://tempuri.org/GetRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap12:operation soapAction="http://tempuri.org/GetUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCategories">
+      <soap12:operation soapAction="http://tempuri.org/GetCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategory">
+      <soap12:operation soapAction="http://tempuri.org/UpdateCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserCategory">
+      <soap12:operation soapAction="http://tempuri.org/InserCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCategory">
+      <soap12:operation soapAction="http://tempuri.org/DeleteCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGenres">
+      <soap12:operation soapAction="http://tempuri.org/GetGenres" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGenre">
+      <soap12:operation soapAction="http://tempuri.org/UpdateGenre" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserGenre">
+      <soap12:operation soapAction="http://tempuri.org/InserGenre" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGenre">
+      <soap12:operation soapAction="http://tempuri.org/DeleteGenre" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap12:operation soapAction="http://tempuri.org/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthors">
+      <soap12:operation soapAction="http://tempuri.org/GetAuthors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAuthor">
+      <soap12:operation soapAction="http://tempuri.org/DeleteAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAuthor">
+      <soap12:operation soapAction="http://tempuri.org/AddAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAuthor">
+      <soap12:operation soapAction="http://tempuri.org/UpdateAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProducers">
+      <soap12:operation soapAction="http://tempuri.org/GetProducers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProducer">
+      <soap12:operation soapAction="http://tempuri.org/DeleteProducer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertProducer">
+      <soap12:operation soapAction="http://tempuri.org/InsertProducer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProducer">
+      <soap12:operation soapAction="http://tempuri.org/UpdateProducer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBook">
+      <soap12:operation soapAction="http://tempuri.org/InsertBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBook">
+      <soap12:operation soapAction="http://tempuri.org/DeleteBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBook">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBooks">
+      <soap12:operation soapAction="http://tempuri.org/GetBooks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookImage">
+      <soap12:operation soapAction="http://tempuri.org/InsertBookImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookImage">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBookImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookImage">
+      <soap12:operation soapAction="http://tempuri.org/DeleteBookImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookImages">
+      <soap12:operation soapAction="http://tempuri.org/GetBookImages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookCategory">
+      <soap12:operation soapAction="http://tempuri.org/InsertBookCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookCategory">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBookCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookCategory">
+      <soap12:operation soapAction="http://tempuri.org/DeleteBookCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookCategories">
+      <soap12:operation soapAction="http://tempuri.org/GetBookCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookAuthor">
+      <soap12:operation soapAction="http://tempuri.org/InsertBookAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookAuthor">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBookAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookAuthor">
+      <soap12:operation soapAction="http://tempuri.org/DeleteBookAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookAuthors">
+      <soap12:operation soapAction="http://tempuri.org/GetBookAuthors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertBookSoftCopy">
+      <soap12:operation soapAction="http://tempuri.org/InsertBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBookSoftCopy">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookSoftCopy">
+      <soap12:operation soapAction="http://tempuri.org/DeleteBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookSoftCopy">
+      <soap12:operation soapAction="http://tempuri.org/GetBookSoftCopy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLanguages">
+      <soap12:operation soapAction="http://tempuri.org/GetLanguages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddWishList">
+      <soap12:operation soapAction="http://tempuri.org/AddWishList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWishList">
+      <soap12:operation soapAction="http://tempuri.org/GetWishList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWishList">
+      <soap12:operation soapAction="http://tempuri.org/GetAllWishList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWishList">
+      <soap12:operation soapAction="http://tempuri.org/DeleteWishList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLike">
+      <soap12:operation soapAction="http://tempuri.org/AddLike" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLike">
+      <soap12:operation soapAction="http://tempuri.org/RemoveLike" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllLikes">
+      <soap12:operation soapAction="http://tempuri.org/GetAllLikes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnonymousView">
+      <soap12:operation soapAction="http://tempuri.org/AddAnonymousView" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViews">
+      <soap12:operation soapAction="http://tempuri.org/GetViews" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <soap12:operation soapAction="http://tempuri.org/AddRating" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRating">
+      <soap12:operation soapAction="http://tempuri.org/UpdateRating" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <soap12:operation soapAction="http://tempuri.org/GetRating" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRatingByBookId">
+      <soap12:operation soapAction="http://tempuri.org/GetRatingByBookId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddReview">
+      <soap12:operation soapAction="http://tempuri.org/AddReview" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookRevieww">
+      <soap12:operation soapAction="http://tempuri.org/GetBookRevieww" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReview">
+      <soap12:operation soapAction="http://tempuri.org/DeleteReview" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReviews">
+      <soap12:operation soapAction="http://tempuri.org/GetAllReviews" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="bsms_service">
+    <wsdl:port name="bsms_serviceSoap" binding="tns:bsms_serviceSoap">
+      <soap:address location="http://localhost:6382/bsms_service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="bsms_serviceSoap12" binding="tns:bsms_serviceSoap12">
+      <soap12:address location="http://localhost:6382/bsms_service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

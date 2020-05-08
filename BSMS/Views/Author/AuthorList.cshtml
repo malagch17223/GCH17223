@@ -1,0 +1,62 @@
+﻿@model PagedList.IPagedList<BSMS.bsms.localhost.AUTHOR>
+@using PagedList.Mvc;
+@using BSMS.Models;
+@{
+    ViewBag.Title = "AuthorList";
+    ViewBag.Page = "Author";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("index","home")">Home</a></li>
+            <li class="active">Author</li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="container">
+    <div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 col-lg-4 box-product-outer">
+            <div class="box-product">
+                <div class="img-wrapper">
+                    <a href="@Url.Action("AuthorDetail", "Author", new { id = item.AUTHORID })">
+                       
+                        <div class="author-img" style="height:300px; background-image:url(@item.THUMBNAIL_PATH); background-size:100%" ></div>
+                    </a>
+                    <div class="tags">
+                        <span class="label-tags"><span class="label label-default arrowed">New</span></span>
+                    </div>
+                    <div class="tags tags-left">
+                        <span class="label-tags"><span class="label label-danger arrowed-right">Sale</span></span>
+                    </div>
+                    <div class="option">
+                        <a href="#" data-toggle="tooltip" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+
+                        <a href="@Url.Action("AuthorDetail", "Author", new { id = item.AUTHORID })" data-toggle="tooltip" title="Books By This Author" class=""><i class="fa fa-book"></i></a>
+
+                    </div>
+                </div>
+                <h6><a href="detail.html"> @item.FIRSTNAME @item.LASTNAME </a></h6>
+                <div class="price">
+                    <div> Number of Books <span>@BookModel.CountBookByAuthor(item.AUTHORID)</span> </div>
+                   
+                </div>
+                <div class="rating">
+
+                   <p> @item.BIOGRAPHY </p>
+                </div>
+            </div>
+
+    </div>
+    
+    }
+    </div>
+    <center>
+        @Html.PagedListPager(Model, page => Url.Action("AuthorList", new { page, pageSize = Model.PageSize }))
+    </center>
+</div>

@@ -1,0 +1,321 @@
+﻿@model BSMS.bsms.localhost.BOOK
+@using BSMS.Models;
+@using BSMS.Session;
+@{
+    ViewBag.Title = Model.NAME;
+    ViewBag.Page = "Book";
+    IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookImage = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == Model.BOOKID);
+    SessionHandler loginSession = new SessionHandler();
+}
+
+<style>
+    .addtionImgDiv {
+        padding: 5px;
+        border-width: 1px;
+        border-color: white;
+    }
+
+    .addtionImgDiv:hover {
+        cursor: pointer;
+        transform:scale(0.9);
+    }
+
+    .slidable {
+        transition: all 0.5s ease;
+        width:100%;
+       
+    }
+    .slidable:hover{
+        transform:scale(0.8);
+    }
+
+</style>
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container" onload="bindView()">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="@Url.Action("BookList","Book")">Book</a></li>
+            <li class="active"> @Model.NAME </li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+<!-- Main Content -->
+<div class="container m-t-3">
+    <div class="row">
+
+        <!-- Image List -->
+        <div class="col-sm-4">
+            <div class="image-detail" style="height:550px">
+                <img id="bookImage" class="img-innerWrapper slidable" src="@bookImage.ElementAt(0).IMAGEPATH" data-zoom-image="images/demo/p1-large-1.jpg" alt="">
+            </div>
+            <div class="row" style="border-style: solid; border-width: 5px; border-color:#666">
+                <div class="products-slider-detail m-b-2">
+
+                    @foreach (var image in bookImage)
+                    {
+                       
+                            <div class="owl-item active" style="width: 51.25px; margin-right: 5px; float:left" onmouseover="changeImage('@image.IMAGEPATH')">
+                                <center>  <a><img src="@image.IMAGEPATH" alt="" class="img-thumbnail addtionImgDiv"></a></center>
+                            </div>   
+                    }
+
+                </div>
+            </div>
+            <br>
+           
+            <div class="share-button m-b-3">
+                @BookModel.LikeCount(Model.BOOKID) <a style="color:#666; padding-right:10px"> <i class="fa fa-thumbs-up fa-2x"></i> </a>
+                @BookModel.ViewsCount(Model.BOOKID) <a style="color:#666"> <i class="fa fa-eye fa-2x"></i> </a>
+            </div>
+
+            <div class="rating">
+                <i id="star1" onclick="rating(1)" class="fa fa-star" onmouseover="FillIn(1)" onmousedown="FillOut(1)"></i>
+                <i id="star2" onclick="rating(2)" class="fa fa-star" onmouseover="FillIn(2)" onmousedown="FillOut(2)"></i>
+                <i id="star3" onclick="rating(3)" class="fa fa-star" onmouseover="FillIn(3)" onmousedown="FillOut(3)"></i>
+                <i id="star4" onclick="rating(4)" class="fa fa-star" onmouseover="FillIn(4)" onmousedown="FillOut(4)"></i>
+                <i id="star5" onclick="rating(5)" class="fa fa-star-half-o" onmouseover="FillIn(5)" onmousedown="FillOut(5)"></i>
+                <a href="#">(5 reviews)</a>
+            </div>
+
+        </div>
+        <!-- End Image List -->
+
+        <div class="col-sm-8">
+            <div class="title-detail">@Model.NAME </div>
+            <table class="table table-detail">
+                <tbody>
+                    <tr>
+                        <td>Price</td>
+                        <td>
+                            <div class="price">
+                                <div>$@(Model.PRICE - ((Model.PRICE * Model.PERCENTAGE_OFF) / 100) ) <span class="label label-default arrowed">-@Model.PERCENTAGE_OFF%</span></div>
+                                <span class="price-old">$@Model.PRICE</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Genre</td>
+                        <td>
+                            @Model.GENRE.NAME
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Producer</td>
+                        <td>
+                            @Model.PRODUCER.NAME
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Language</td>
+                        <td>
+                            @Model.LANGUAGE.LANGUAGE1
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Reference</td>
+                        <td>
+                            @Model.REFERENCE
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> Synoposis </td>
+                        <td>
+                            @Model.SYNOPOSIS
+                        </td>
+                    </tr>
+
+                    @{
+                        if (BookModel.getBookSoftCopy(Model.BOOKID).Count > 0 && loginSession.AuthenticatedUser() != null)
+                        {
+                            int count = 1;
+                            <tr>
+                                <td> Book Soft Copy </td>
+                                <td>
+                                    
+                                    @foreach (var bCopy in BookModel.getBookSoftCopy(Model.BOOKID))
+                                    {
+                                        <a href="@bCopy.FILEPATH" target="_blank"> Read Version @count Online </a>
+                                        <br>
+                                        <a href="@bCopy.FILEPATH" download> Download Version @count Online </a>
+                                        <br><br>
+                                        count++;
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#desc" aria-controls="desc" role="tab" data-toggle="tab">Description</a></li>
+                <li role="presentation"><a href="#detail" aria-controls="detail" role="tab" data-toggle="tab">Detail</a></li>
+                <li role="presentation"><a href="#author" aria-controls="author" role="tab" data-toggle="tab">Author </a></li>
+            </ul>
+            <!-- End Nav tabs -->
+            <!-- Tab panes -->
+            <div class="tab-content tab-content-detail">
+
+                <!-- Description Tab Content -->
+                <div role="tabpanel" class="tab-pane active" id="desc">
+                    <div class="well">
+                        <p>
+                            @Model.SYNOPOSIS
+                        </p>
+                    </div>
+                </div>
+                <!-- End Description Tab Content -->
+                <!-- Detail Tab Content -->
+                <div role="tabpanel" class="tab-pane" id="detail">
+                    <div class="well">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>Producer</td>
+                                    <td>@Model.PRODUCER.NAME</td>
+                                </tr>
+                                <tr>
+                                    <td>ISBN NUMBER</td>
+                                    <td>@Model.ISBN_NUMBER</td>
+                                </tr>
+                                <tr>
+                                    <td>Reference</td>
+                                    <td>@Model.REFERENCE</td>
+                                </tr>
+                                <tr>
+                                    <td>Genre</td>
+                                    <td>@Model.GENRE.NAME</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- End Detail Tab Content -->
+                <!-- Description Tab Content -->
+                <div role="tabpanel" class="tab-pane active" id="author">
+                    <div class="well">
+
+                        <p>
+                            Author's Information goes here
+                        </p>
+                    </div>
+                </div>
+                <!-- End Description Tab Content -->
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <center>
+        <div class="title"> <span> Authors of this Book </span> </div>
+        @foreach (var item in AuthorModel.BookAuthor(Model.BOOKID))
+        {
+            <div class="col-sm-3 col-lg-3 box-product-outer">
+                <div class="box-product">
+                    <div class="img-wrapper">
+                        <a href="@Url.Action("AuthorDetail", "Author", new { id = item.AUTHORID })">
+
+                            <div class="author-img" style="height:300px; background-image:url(@item.THUMBNAIL_PATH); background-size:100%"></div>
+                        </a>
+                        <div class="tags">
+                            <span class="label-tags"><span class="label label-default arrowed">New</span></span>
+                        </div>
+                        <div class="tags tags-left">
+                            <span class="label-tags"><span class="label label-danger arrowed-right">Sale</span></span>
+                        </div>
+                        <div class="option">
+                            <a href="#" data-toggle="tooltip" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+
+                            <a href="@Url.Action("AuthorDetail", "Author", new { id = item.AUTHORID })" data-toggle="tooltip" title="Books By This Author" class=""><i class="fa fa-book"></i></a>
+
+                        </div>
+                    </div>
+                    <h6><a href="detail.html"> @item.FIRSTNAME @item.LASTNAME </a></h6>
+                    <div class="price">
+                        <div> Number of Books <span>@BookModel.CountBookByAuthor(item.AUTHORID)</span> </div>
+
+                    </div>
+                    <div class="rating" style="max-height:120px; overflow-x:scroll; overflow-y:no-display">
+                        <p> @item.BIOGRAPHY </p>
+                    </div>
+                </div>
+
+            </div>
+        }
+        </center>
+    </div>
+
+</div>
+
+<script>
+    function changeImage(imgPath) {
+       // swal('trigged');
+        document.getElementById("bookImage").src = imgPath;
+    }
+    window.onload = function () {
+        var bookid = '@Model.BOOKID';
+        FillIn(@BookModel.GetRating(Model.BOOKID));
+        $.ajax({
+            method: 'POST',
+            url: '@Url.Action("AddView", "Book")',
+            data: { bookid: bookid },
+            success: function (data) {
+
+            }
+        });
+    };
+
+    function FillOut() {
+        $("#star1").attr("class", "fa fa-star-o");
+        $("#star2").attr("class", "fa fa-star-o");
+        $("#star3").attr("class", "fa fa-star-o");
+        $("#star4").attr("class", "fa fa-star-o");
+        $("#star5").attr("class", "fa fa-star-o");
+        //FillIn(@BookModel.GetRating(Model.BOOKID));
+    }
+
+    function FillIn(numFill) {
+        FillOut();
+        if (numFill >= 1) {
+            $("#star1").attr("class", "fa fa-star");
+        }
+        if (numFill >= 2) {
+            $("#star2").attr("class", "fa fa-star");
+        }
+        if (numFill >= 3) {
+            $("#star3").attr("class", "fa fa-star");
+        }
+        if (numFill >= 4) {
+            $("#star4").attr("class", "fa fa-star");
+        }
+        if (numFill >= 5) {
+            $("#star5").attr("class", "fa fa-star");
+        }
+    }
+
+
+    function rating(ratingValue) {
+        FillIn(ratingValue);
+        var bookid = '@Model.BOOKID';
+        $.ajax({
+            type:'POST',
+            url:'@Url.Action("AddRating", "Book")',
+            data:{bookid:bookid, rating:ratingValue},
+            success: function (data) {
+                FillIn(@BookModel.GetRating(Model.BOOKID));
+            }
+        });
+    }
+</script>

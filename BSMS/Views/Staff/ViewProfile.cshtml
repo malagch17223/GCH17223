@@ -1,0 +1,88 @@
+﻿@model BSMS.bsms.localhost.USER
+
+@{
+    ViewBag.Title = "ViewProfile";
+    ViewBag.Page = "Staff";
+    ViewBag.Action = "View Profile";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+
+<div>
+    <div class="card">
+        <div class="card-block">
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.USERNAME)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.USERNAME)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PASSWORDHASH)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PASSWORDHASH)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FIRSTNAME)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FIRSTNAME)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LASTNAME)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LASTNAME)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MIDDLENAME)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MIDDLENAME)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.THUMBNAIL_PATH)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.THUMBNAIL_PATH)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EMAIL)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EMAIL)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ROLEID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ROLEID)
+                </dd>
+
+            </dl>
+        
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.USERID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+</div>
+</div>
+</div>

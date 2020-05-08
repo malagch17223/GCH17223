@@ -1,0 +1,35 @@
+﻿@model BSMS.Entity.AdvanceSearch
+
+@{
+    ViewBag.Title = "AdvanceSearch";
+}
+<div class="container">
+    <form>
+        <div class="form">
+            <div class="form-group">
+                <label class="col-md-4" for="name"> Name </label>
+                <div class="form-group col-md-8">
+                    <input type="text" name="name" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4" for="isbnNumber"> ISBN Number</label>
+                <div class="col-md-8">
+                    <input type="number" class="form-control" minLength="12" maxlength="15" name="isbnNumber" />
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <div class="col-md-offset-5">
+
+                    <button type="submit" value="Search" class="btn btn-default">
+                        <span class="fa fa-search fa-2x"> </span>
+                        &nbsp; Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

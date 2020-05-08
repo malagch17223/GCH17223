@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BSMS" Class="DataAccessDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=Localhost\SQLExpress;Initial Catalog=BSMS;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BSMSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AUTHOR" Member="AUTHORs">
+    <Type Name="AUTHOR">
+      <Column Name="AUTHORID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FIRSTNAME" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="LASTNAME" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="MIDDLENAME" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="BIOGRAPHY" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="ALIASNAME" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="THUMBNAIL_PATH" Type="System.String" DbType="VarChar(70)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BOOK_AUTHOR" Member="BOOK_AUTHORs">
+    <Type Name="BOOK_AUTHOR">
+      <Column Name="BOOK_AUTHORID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AUTHORID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AUTHOR_BOOK_AUTHOR" Member="AUTHOR" ThisKey="AUTHORID" OtherKey="AUTHORID" Type="AUTHOR" IsForeignKey="true" />
+      <Association Name="BOOK_BOOK_AUTHOR" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BOOK_CATEGORY" Member="BOOK_CATEGORies">
+    <Type Name="BOOK_CATEGORY">
+      <Column Name="BOOK_CATEGORYID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CATEGORYID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CATEGORY_BOOK_CATEGORY" Member="CATEGORY" ThisKey="CATEGORYID" OtherKey="CATEGORYID" Type="CATEGORY" IsForeignKey="true" />
+      <Association Name="BOOK_BOOK_CATEGORY" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BOOK_SOFTCOPY" Member="BOOK_SOFTCOPies">
+    <Type Name="BOOK_SOFTCOPY">
+      <Column Name="BSCID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VERSION" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FILEPATH" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
+      <Column Name="FILESIZE" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="BOOK_BOOK_SOFTCOPY" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CATEGORY" Member="CATEGORies">
+    <Type Name="CATEGORY">
+      <Column Name="CATEGORYID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="DESCRIPTION" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="REFERENCE_KEY" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CATEGORY_THUMBNAIL" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GENRE" Member="GENREs">
+    <Type Name="GENRE">
+      <Column Name="GENREID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="DESCRIPTION" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="REFERENCE_KEY" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LANGUAGE" Member="LANGUAGEs">
+    <Type Name="LANGUAGE">
+      <Column Name="LANGUAGEID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LANGUAGE" Member="LANGUAGE1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRODUCER" Member="PRODUCERs">
+    <Type Name="PRODUCER">
+      <Column Name="PRODUCERID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADDRESS" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CONTACT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ROLE" Member="ROLEs">
+    <Type Name="ROLE">
+      <Column Name="ROLEID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE" Member="ROLE1" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[USER]" Member="USERs">
+    <Type Name="USER">
+      <Column Name="USERID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USERNAME" Type="System.String" DbType="VarChar(14) NOT NULL" CanBeNull="false" />
+      <Column Name="PASSWORDHASH" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="FIRSTNAME" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="LASTNAME" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="MIDDLENAME" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="THUMBNAIL_PATH" Type="System.String" DbType="VarChar(70)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ROLEID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ROLE_USER" Member="ROLE" ThisKey="ROLEID" OtherKey="ROLEID" Type="ROLE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WATCHLIST" Member="WATCHLISTs">
+    <Type Name="WATCHLIST">
+      <Column Name="WATCHLISTID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USERID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="USER_WATCHLIST" Member="USER" ThisKey="USERID" OtherKey="USERID" Type="USER" IsForeignKey="true" />
+      <Association Name="BOOK_WATCHLIST" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BOOK_IMAGE" Member="BOOK_IMAGEs">
+    <Type Name="BOOK_IMAGE">
+      <Column Name="BOOK_IMAGEID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IMAGEPATH" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="BOOK_BOOK_IMAGE" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BOOK" Member="BOOKs">
+    <Type Name="BOOK">
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ISBN_NUMBER" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SYNOPOSIS" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="ISPUBLISHED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="REFERENCE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DATE_PUBLISHED" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PRICE" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PERCENTAGE_OFF" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GENREID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="STAFFID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODUCERID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TRANSLATEDFROM" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LANGUAGEID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="GENRE_BOOK" Member="GENRE" ThisKey="GENREID" OtherKey="GENREID" Type="GENRE" IsForeignKey="true" />
+      <Association Name="LANGUAGE_BOOK" Member="LANGUAGE" ThisKey="LANGUAGEID" OtherKey="LANGUAGEID" Type="LANGUAGE" IsForeignKey="true" />
+      <Association Name="PRODUCER_BOOK" Member="PRODUCER" ThisKey="PRODUCERID" OtherKey="PRODUCERID" Type="PRODUCER" IsForeignKey="true" />
+      <Association Name="USER_BOOK" Member="USER" ThisKey="STAFFID" OtherKey="USERID" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[VIEW]" Member="VIEWs">
+    <Type Name="VIEW">
+      <Column Name="VIEWID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USERID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BOOK_VIEW" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+      <Association Name="USER_VIEW" Member="USER" ThisKey="USERID" OtherKey="USERID" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.REVIEW" Member="REVIEWs">
+    <Type Name="REVIEW">
+      <Column Name="REVIEWID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USERID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="REVIEW" Member="REVIEW1" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="BOOK_REVIEW" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+      <Association Name="USER_REVIEW" Member="USER" ThisKey="USERID" OtherKey="USERID" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RATING" Member="RATINGs">
+    <Type Name="RATING">
+      <Column Name="RATINGID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USERID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RATING" Member="RATING1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BOOK_RATING" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+      <Association Name="USER_RATING" Member="USER" ThisKey="USERID" OtherKey="USERID" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[LIKE]" Member="LIKEs">
+    <Type Name="LIKE">
+      <Column Name="LIKEID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USERID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BOOKID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BOOK_LIKE" Member="BOOK" ThisKey="BOOKID" OtherKey="BOOKID" Type="BOOK" IsForeignKey="true" />
+      <Association Name="USER_LIKE" Member="USER" ThisKey="USERID" OtherKey="USERID" Type="USER" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

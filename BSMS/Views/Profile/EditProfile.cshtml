@@ -1,0 +1,112 @@
+﻿@model BSMS.bsms.localhost.USER
+
+@{
+    ViewBag.Title = "EditProfile";
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href='@Url.Action("Index","Home")'>Home</a></li>
+            <li class="active">Edit Profile</li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+
+<div class="container">
+    <div class="row">
+        <br><br>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="title"><span>Edit Profile </span></div>
+            <br>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form">
+                    <br />
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.USERID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.USERNAME, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FIRSTNAME, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.FIRSTNAME, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LASTNAME, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.LASTNAME, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MIDDLENAME, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.MIDDLENAME, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MIDDLENAME, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <input type="submit" value="Update Profile" class="btn btn-default btn-theme" />
+
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="title"><span>Change Profile Image </span></div>
+            <img id="img" src="@(Model.THUMBNAIL_PATH == null ? "/UserImages/avatar.png" : Model.THUMBNAIL_PATH)" onclick="fileInputToggle()" style="cursor:pointer; width:100%">
+           <form method="post" id="imageForm" action="@Url.Action("ChangeAvatar","Profile")" enctype="multipart/form-data">
+                <input type="file" id="profileImage" name="profileImage" accept=".jpg,.JPEG,.png,.gif" style="display:none" onchange="sumbitProfileImage()">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function fileInputToggle() {
+        $("#profileImage").trigger("click");
+    }
+
+
+    function sumbitProfileImage() {
+
+        if ($("#imageForm").submit());
+    }
+
+    function ajaxSuccess(response){
+        alert(response);
+    }
+
+</script>

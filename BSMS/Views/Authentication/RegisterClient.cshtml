@@ -1,0 +1,133 @@
+﻿@model BSMS.bsms.localhost.USER
+@using BSMS.Session
+@{
+    SessionHandler LoginSession = new SessionHandler();
+    ViewBag.Title = "RegisterClient";
+    if (LoginSession.ISAdmin())
+    {
+        Layout = "~/Views/Shared/LDashboard.cshtml";
+    }
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href='@Url.Action("Index","Home")'>Home</a></li>
+            <li class="active">Register</li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="container">
+    <br />
+    <div class="row">
+        @using (Html.BeginForm("RegisterClient", "Authentication", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form">
+                <br />
+                <div class="title"><span>Create Account</span></div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                       
+                        <label for="USERNAME"> * Username </label>
+                        
+                            @Html.EditorFor(model => model.USERNAME, new { htmlAttributes = new { @class = "form-control form-control-line", placeholder="username", required="true" } })
+                            @Html.ValidationMessageFor(model => model.USERNAME, "", new { @class = "text-danger" })
+                       
+                    </div>
+
+                    <div class="form-group">
+                        <label for="PASSWORDHASH"> * Password </label>
+                       
+                            @Html.EditorFor(model => model.PASSWORDHASH, new { htmlAttributes = new { @class = "form-control form-control-line", placeholder="password", required = "true" } })
+                            @Html.ValidationMessageFor(model => model.PASSWORDHASH, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FIRSTNAME"> * First Name </label>
+                        
+                            @Html.EditorFor(model => model.FIRSTNAME, new { htmlAttributes = new { @class = "form-control form-control-line", placeholder="first name", required = "true" } })
+                            @Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger" })
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="LASTNAME" > * Last Name </label>
+                       
+                            @Html.EditorFor(model => model.LASTNAME, new { htmlAttributes = new { @class = "form-control form-control-line", placeholder="last name", required = "true" } })
+                            @Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger" })
+                       
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label for="MIDDLENAME"> Middle Name </label>
+                       
+                            @Html.EditorFor(model => model.MIDDLENAME, new { htmlAttributes = new { @class = "form-control form-control-line", placeholder="middle name" } })
+                            @Html.ValidationMessageFor(model => model.MIDDLENAME, "", new { @class = "text-danger" })
+                     
+                    </div>
+
+                    <div class="form-group">
+                        <label for="THUMBNAIL_PATH"> Thumbnail </label>
+
+                           <input type="file" class="form-control form-control-line" name="thumbnail" />
+                            @Html.ValidationMessageFor(model => model.THUMBNAIL_PATH, "", new { @class = "text-danger" })
+                      
+                    </div>
+
+                    <div class="form-group">
+                        <label for="EMAIL" > * Email </label>
+                        
+                            @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control form-control-line", placeholder="Email", required = "true" } })
+                            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                       
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <button type="submit" class="btn btn-default btn-theme"><i class="fa fa-long-arrow-right"></i> Register</button>
+                        <button type="button" class="btn btn-default btn-theme"><i class="fa fa-long-arrow-right"></i> Cancel </button>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+    </div>
+</div>
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <script>
+        var message = '@ViewBag.Message';
+        swal(
+                  'Registration Information Message!',
+                    message,
+                  'success'
+                );
+
+        window.location = '@Url.Action("Login","Authentication")';
+    </script>
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <script>
+        var message = '@ViewBag.ErrorMessage';
+        swal(
+                  'Registration Error Message!',
+                    message,
+                  'error'
+                )
+    </script>
+}

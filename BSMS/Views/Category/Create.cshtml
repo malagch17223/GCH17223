@@ -1,0 +1,97 @@
+﻿@model BSMS.bsms.localhost.CATEGORY
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.Page = "Category";
+    ViewBag.Action = "Add Category";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            @using (Html.BeginForm("Create", "Category", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-material",id="AddCategory" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                   
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="NAME" class="control-label col-md-12"> * Category Name </label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.NAME, new { htmlAttributes = new { @class = "form-control form-control-line", required="true" } })
+                            @Html.ValidationMessageFor(model => model.NAME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DESCRIPTION" class="control-label col-md-12"> * Category Description </label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DESCRIPTION, new { htmlAttributes = new { @class = "form-control form-control-line", required="true" } })
+                            @Html.ValidationMessageFor(model => model.DESCRIPTION, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NAME" class="control-label col-md-12"> * Category Key </label>
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.REFERENCE_KEY, new { htmlAttributes = new { @class = "form-control form-control-line", required="true" } })
+                            @Html.ValidationMessageFor(model => model.REFERENCE_KEY, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-12">
+                            <input type="button" value="Add Category" class="btn btn-default" onclick="submitForm('AddCategory','@Url.Action("Create", "Category")','@Url.Action("Index", "Category")') " />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    </div>
+
+
+
+
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <script>
+
+        var message = '@ViewBag.Message';
+        swal({
+            title: 'System Processing',
+            text: 'System is Processing Your Request, Please wait a few seconce',
+            timer: 3000,
+            type: 'info',
+            background: '#fff url(http://www.planwallpaper.com/static/images/518151-backgrounds_W3qVPu2.jpg)'
+        }).then(
+        function () { },
+// handling the promise rejection
+            function (dismiss) {
+                swal(
+              'Information Message',
+                message,
+              'info'
+            )
+               window.location = '@Url.Action("Index","Category")';
+            }
+        )
+
+    </script>
+}
+
+
+@if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <script>
+        var message = '@ViewBag.ErrorMessage';
+        swal({
+            title: 'Error Message',
+            text: message,
+            type:'error',
+            background: '#fff url(http://www.planwallpaper.com/static/images/518151-backgrounds_W3qVPu2.jpg)'
+        })
+    </script>
+}

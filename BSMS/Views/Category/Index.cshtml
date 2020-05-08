@@ -1,0 +1,95 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.CATEGORY>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Page = "Category";
+    ViewBag.Action = "List All Category";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<div class="container">
+
+    <div class="card">
+        <div class="card-block">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr style="height:20px">
+                    <th>
+                        @Html.DisplayNameFor(model => model.NAME)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DESCRIPTION)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.REFERENCE_KEY)
+                    </th>
+
+                    <th></th>
+                </tr>
+                <tbody class="table-hover">
+                    @foreach (var item in Model)
+                    {
+                        <tr id="@("category_"+item.CATEGORYID)">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NAME)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DESCRIPTION)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.REFERENCE_KEY)
+                            </td>
+
+                            <td>
+                                <a href='\Category\Edit\@item.CATEGORYID'>
+                                    <span class="fa fa-edit"></span>
+                                </a> |
+                                <a href='\Category\Details\@item.CATEGORYID'>
+                                    <span class="fa fa-info"></span>
+                                </a> |
+                                <a onclick="DeleteRequest('@Url.Action("Delete","Category", new { id = item.CATEGORYID})','@("category_"+item.CATEGORYID)')">
+                                    <span class="fa fa-remove"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function confirmMessage(id) {
+
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function () {
+                swal({
+                    title: 'Request Processing',
+                    text: 'OLS is processing your request',
+                    timer: 20000
+                })
+                window.location = '@Url.Action("Delete", "Category")/' + id;
+            }, function (dismiss) {
+                // dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+                if (dismiss === 'cancel') {
+                    swal(
+                      'Cancelled',
+                      'Your imaginary file is safe :)',
+                      'error'
+                    )
+                }
+            })
+
+        }
+    </script>

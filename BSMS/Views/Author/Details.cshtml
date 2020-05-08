@@ -1,0 +1,39 @@
+﻿@model BSMS.bsms.localhost.AUTHOR
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Page = "Author";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+<div class="container">
+
+    <div class="row">
+
+        <div class="card">
+            <div class="card-block">
+
+                <center>
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-block">
+                                <center class="m-t-30">
+                                    <img src="@Model.THUMBNAIL_PATH" class="img-circle" width="150" />
+                                    <h4 class="card-title m-t-10">@Model.FIRSTNAME @Model.MIDDLENAME @Model.LASTNAME</h4>
+                                    <h6 class="card-subtitle"> @Model.BIOGRAPHY </h6>
+
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.AUTHORID }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </center>
+                </div>
+        </div>
+
+    </div>
+</div>

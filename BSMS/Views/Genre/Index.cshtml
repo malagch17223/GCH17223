@@ -1,0 +1,91 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.GENRE>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Page = "Genre";
+    ViewBag.Action = "List Genre";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NAME)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DESCRIPTION)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.REFERENCE_KEY)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NAME)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.REFERENCE_KEY)
+                        </td>
+                        <td>
+                            <a href='\Genre\Edit\@item.GENREID'>
+                                <span class="fa fa-edit"></span>
+                            </a> |
+                            <a href='\Genre\Details\@item.GENREID'>
+                                <span class="fa fa-eye"></span>
+                            </a> |
+                            <a onclick="confirmMessage(@item.GENREID)">
+                                <span class="fa fa-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+    </div>
+    <script>
+        function confirmMessage(id) {
+
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function () {
+                swal({
+                    title: 'Request Processing',
+                    text: 'BSMS is processing your request',
+                    timer: 5000
+                })
+                window.location = '@Url.Action("Delete", "Genre")/' + id;
+            }, function (dismiss) {
+                // dismiss can be 'cancel', 'overlay',
+                // 'close', and 'timer'
+                if (dismiss === 'cancel') {
+                    swal(
+                      'Cancelled',
+                      'You have Cancel the Delete Event :)',
+                      'error'
+                    )
+                }
+            })
+
+        }
+    </script>

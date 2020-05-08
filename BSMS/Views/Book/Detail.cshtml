@@ -1,0 +1,42 @@
+﻿@model BSMS.bsms.localhost.BOOK
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/LDashboard.cshtml";
+    ViewBag.Page = "Book";
+    IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookImage = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == Model.BOOKID);
+}
+<div class="container">
+
+    <div class="row">
+
+        <div class="card">
+            <div class="card-block">
+
+                <center>
+                    <div class="col-lg-12 col-xlg-3 col-md-12">
+                        <div class="card">
+                            <div class="card-block">
+                                <center class="m-t-30">
+                                   <div class="row" style="padding:5px">
+                                       <center><img src="@bookImage.ElementAt(0).IMAGEPATH" style="border-radius:0px" height="200px"></center>
+                                   </div>
+                                    <h4 class="card-title m-t-10">@Model.NAME</h4>
+                                    <h6 class="card-subtitle"> @Model.PRICE </h6>
+
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.BOOKID }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </center>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.PRODUCER>
+
+@{
+    ViewBag.Title = "Producer";
+}
+<div class="container">
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table stylish-table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADDRESS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTACT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="width:50px;"><span class="round">@item.NAME.ToCharArray()[0]+"" </span></td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONTACT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAIL)
+        </td>
+    
+    </tr>
+}
+
+</table>
+</div>

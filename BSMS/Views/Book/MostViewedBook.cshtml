@@ -1,0 +1,117 @@
+﻿@using BSMS.Session;
+@using BSMS.Models;
+@using System.Web.Script.Serialization;
+@using PagedList.Mvc;
+
+@{
+    SessionHandler loginSession = new SessionHandler();
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+
+        <br><br>
+        <div class="title"><span>Most Viewed Books</span></div><br>
+        @foreach (var item in BookModel.MostViewedBooks(4))
+            {
+                JavaScriptSerializer json = new JavaScriptSerializer();
+
+                IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookImage = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == item.BOOKID);
+                List<string> imagesPath = new List<string>();
+                foreach (BSMS.bsms.localhost.BOOK_IMAGE image in bookImage)
+                {
+                    imagesPath.Add(image.IMAGEPATH);
+                }
+
+                <div class="col-sm-3 col-lg-3 box-product-outer">
+                    <div class="box-product">
+                        <div class="img-wrapper">
+                            <a href="@Url.Action("BookDetail", "Book", new { id = item.BOOKID })">
+                                <div class="img-innerWrapper slidable" id="@("mostViewed"+item.BOOKID)" style="background-image:url('@bookImage.ElementAt(0).IMAGEPATH'); background-size:100%; height:330px" onmouseout="unloadImage()" onmouseover="loadImages(@json.Serialize(imagesPath), '@item.BOOKID')"> </div>
+                            </a>
+                            <div class="tags">
+                                <span class="label-tags"><span class="label label-default arrowed">New</span></span>
+                            </div>
+                            <div class="tags tags-left">
+                                <span class="label-tags"><span class="label label-danger arrowed-right">Sale</span></span>
+                            </div>
+                            <div class="option" style="height:100px">
+
+                                @{
+                                    int counter = 0;
+                                }
+                                @foreach (var img in bookImage)
+                                {
+                                    if (counter >= 3)
+                                    {
+                                        continue;
+                                    }
+                                    <img src="@img.IMAGEPATH" height="70%" onmouseover="imgChange(this,'@item.BOOKID')" class="addtionImgDiv" />
+                                    counter++;
+                                }
+                                <br>
+
+
+                                @if (loginSession.AuthenticatedUser() == null)
+                                {
+                                    <a onclick="loginRequired()" data-toggle="tooltip" title="Add to Wishlist" class="wishlist"><i class="fa fa-heart"></i></a>
+                                }
+
+                                else if (loginSession.ISCustomer())
+                                {
+                                    if (!WishListModel.Exist(loginSession.AuthenticatedUser().USERID, item.BOOKID))
+                                    {
+                                        <a onclick="addToWishList(@item.BOOKID)" data-toggle="tooltip" title="Add to Wishlist" class="wishlist"><i class="fa fa-heart"></i></a>
+                                        if (!BookModel.Liked(item.BOOKID))
+                                        {
+                                            <a onclick="Like(@item.BOOKID)" id="@("like" + item.BOOKID)" data - toggle="tooltip" title="Like" class="wishlist"><i class="fa fa-thumbs-up"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a onclick="Dislike(@item.BOOKID)" style="color:#666" id="@("like"+item.BOOKID)" data-toggle="tooltip" title="Dislike" class="wishlist"><i class="fa fa-thumbs-down"></i></a>
+                                        }
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                        <h6><a href="detail.html"> @item.NAME </a></h6>
+                        <div class="price">
+                            <div>$@(item.PRICE - ((item.PRICE * item.PERCENTAGE_OFF) / 100) ) <span class="label-tags"><span class="label label-default">-@item.PERCENTAGE_OFF%</span></span></div>
+                            <span class="price-old">$@item.PRICE</span>
+                        </div>
+                        <div class="rating">
+
+                        </div>
+                    </div>
+                </div>
+                                    }
+    </div>
+</div>
+
+
+
+<script>
+
+    var loop = 0;
+    var timer;
+    function startImgLoop(list, id) {
+        clearTimeout(timer);
+        timer = setInterval(function () {
+            if (loop >= list.length) {
+                loop = 0;
+            }
+
+            $('#mostViewed' + id).attr('style', 'background-image:url(' + list[loop] + '); background-size:100%; height:330px');
+            loop++;
+        }
+        , 1000);
+    }
+
+    function stopImgLoop() {
+        clearTimeout(timer);
+    }
+
+</script>

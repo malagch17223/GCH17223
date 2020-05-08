@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BSMS.bsms.localhost.BOOK>
+
+@{
+    ViewBag.Title = "PendingBooks";
+    Layout = "~/Views/Shared/LDashBoard.cshtml";
+    ViewBag.Page = "Book";
+    ViewBag.Action = "List Pending Books";
+}
+
+<div class="container">
+
+    <a href="@Url.Action("AddBook","Book")" class="btn pull-right btn-success"> Add New </a>
+
+    <br><br />
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            IEnumerable<BSMS.bsms.localhost.BOOK_IMAGE> bookImage = BSMS.Models.BookModel.GetBooksImages().Where(bi => bi.BOOKID == item.BOOKID);
+            <div class="col-lg-4 col-xlg-3 col-md-5" id="@("book_"+ item.BOOKID)">
+                <div class="card">
+                    <div class="card-block">
+                        <center class="m-t-30">
+                            <img src="@bookImage.ElementAt(0).IMAGEPATH" class="img-circle" height="200" style="border-radius:0px" />
+                            <h4 class="card-title m-t-10">@item.NAME </h4>
+                            <h6 class="card-subtitle"> @BSMS.Models.AuthorModel.ReducedText(200, item.SYNOPOSIS) </h6>
+                            <div class="row">
+                                <div class="col-sm-4 col-md-6">
+                                    <a href='javascript:void(0)' onclick="ApproveBook('@item.BOOKID', '@Url.Action("ApproveBook","Book")')">  <span class="fa fa-check fa-2x"></span> </a>
+                                </div>
+                                <div class="col-sm-4 col-md-6">
+                                    <a href='javascript:void(0)' onclick="DisApproveBook('@item.BOOKID', '@Url.Action("DisApproveBook","Book")')">  <span class="fa fa-stop fa-2x"></span> </a>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
